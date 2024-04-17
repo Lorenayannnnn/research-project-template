@@ -1,0 +1,59 @@
+data_args:
+  #  Dataset
+  dataset_name: null
+  dataset_config_name: null
+  cache_dir: null
+  max_train_samples: null
+  max_eval_samples: null
+  max_predict_samples: null
+  #  Tokenization
+  max_seq_length: 512
+  pad_to_max_length: False
+  pad_to_multiple_of: 8
+  ignore_pad_token_for_loss: True
+  train_on_inputs: True
+  add_bos_token: False
+  add_eos_token: False
+  num_beams: null
+
+model_args:
+  model_name_or_path: null
+  config_name: null
+  tokenizer_name: null
+  use_fast_tokenizer: False
+  model_revision: "main"
+  token: False
+  # ----- lora hyperparameters -----
+  # lora_weights: null
+  #  lora_r: 16
+  #  lora_alpha: 16
+  #  lora_dropout: 0.05
+  #  lora_target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "fc1", "fc2"]
+
+training_args:
+  output_dir: outputs
+
+  do_train: False
+  do_eval: False
+  do_predict: False
+
+  seed: 42
+  num_train_epochs: 3
+  batch_size: 128
+  micro_batch_size: 16
+  learning_rate: 0.00005
+  lr_scheduler_type: "linear"
+  resume_from_checkpoint: null
+
+  evaluation_strategy: "steps"
+  save_strategy: "steps"
+  save_total_limit: 3
+
+  prediction_loss_only: False
+
+  # wandb
+  wandb_usr: null
+  wandb_project: ""
+  wandb_run_name: ""
+  wandb_watch: ""
+  wandb_log_model: ""

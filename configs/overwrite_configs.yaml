@@ -1,0 +1,12 @@
+data_args:
+  max_train_samples: 3000
+  max_eval_samples: 1000
+  max_predict_samples: 1000
+
+model_args:
+  model_name_or_path: overwrite_test
+
+training_args:
+  output_dir: outputs/overwrite
+
+  do_train: True
