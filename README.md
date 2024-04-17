@@ -1,5 +1,6 @@
 # research-project-template
 Template for research project
+Collaborated with [Ryan Yixiang Wang](https://github.com/ryanyxw)
 
 ## Structure
 ```
