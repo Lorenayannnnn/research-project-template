@@ -52,11 +52,16 @@ def load_config_and_setup_output_dir(args):
         # Merge base and overwrite configs
         configs = OmegaConf.merge(configs, overwrite_configs)
 
+    if configs.training_args.resume_from_checkpoint is not None:
+        # Load configs from checkpoint
+        configs = OmegaConf.merge(configs, OmegaConf.load(os.path.join(configs.training_args.resume_from_checkpoint, "configs.yaml")))
+
     # Prepare output directory
     prepare_folder(os.path.join(output_dir, "configs/"))
 
     # Save base and overwrite configs
-    OmegaConf.save(configs, os.path.join(configs.training_args.output_dir, "configs", "base_configs.yaml"))
-    OmegaConf.save(overwrite_configs, os.path.join(configs.training_args.output_dir, "configs", "overwrite_configs.yaml"))
+    # OmegaConf.save(configs, os.path.join(configs.training_args.output_dir, "configs", "base_configs.yaml"))
+    # OmegaConf.save(overwrite_configs, os.path.join(configs.training_args.output_dir, "configs", "overwrite_configs.yaml"))
+    OmegaConf.save(configs, os.path.join(output_dir, "configs.yaml"))
 
     return configs
