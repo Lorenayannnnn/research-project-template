@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ```
 ### Code Implementation for Each Module
 ### Run
-- Go to [main.sh](main.sh) and modify the configurations in the `configs` folder
+- Go to [main.sh](scripts/main.sh) and modify the configurations in the `configs` folder
 - Run:
 ```
 bash main.sh

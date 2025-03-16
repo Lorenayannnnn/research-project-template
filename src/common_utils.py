@@ -14,11 +14,10 @@ def seed_all(seed):
     random.seed(seed)
     set_seed(seed)
 
-def prepare_folder(file_path):
+def prepare_folder(output_dir):
     """Prepare a folder for a file"""
-    folder = os.path.dirname(file_path)
-    if not os.path.exists(folder):
-        os.makedirs(folder)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
 def prepare_wandb(configs):
     # Check if parameter passed or if set within environ

@@ -18,8 +18,6 @@ def main(args):
     """Preprocess data"""
     tokenized_datasets = preprocess(configs, raw_datasets)
 
-    data_loader = setup_dataloader(datasets=tokenized_datasets, batch_size=configs.training_args.micro_batch_size)
-
     """Load model"""
     model = load_model(configs)
 

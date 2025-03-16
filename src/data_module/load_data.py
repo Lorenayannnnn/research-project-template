@@ -54,18 +54,17 @@ def collate_fn(batch):
     pass
 
 
-def setup_dataloader(datasets, batch_size):
+def setup_dataloader(input_datasets, batch_size):
     """
 
-    :param datasets: dictionary of datasets (train, eval, predict)
-    :param is_train: boolean
+    :param input_datasets: dictionary of datasets (train, eval, predict)
     :param batch_size: encoded test dataset
     :return:
     """
     dataloaders = {}
     for split in ["train", "eval", "predict"]:
-        if split not in datasets:
-            datasets[split] = None
+        if split not in input_datasets:
+            dataloaders[split] = None
         else:
-            dataloaders[split] = DataLoader(datasets[split], shuffle=split == "train", batch_size=batch_size, collate_fn=collate_fn)
+            dataloaders[split] = DataLoader(input_datasets[split], shuffle=split == "train", batch_size=batch_size, collate_fn=collate_fn)
     return dataloaders
