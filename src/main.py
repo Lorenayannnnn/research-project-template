@@ -16,7 +16,8 @@ def main(args):
     raw_datasets = load_data_from_hf(configs.data_args.dataset_name, cache_dir=configs.data_args.cache_dir)
 
     """Preprocess data"""
-    tokenized_datasets = preprocess(configs, raw_datasets)
+    tokenized_datasets, tokenizer = preprocess(configs, raw_datasets)
+    # data_loaders = setup_dataloader(input_datasets=tokenized_datasets, batch_size=configs.running_args.micro_batch_size, tokenizer=tokenizer)
 
     """Load model"""
     model = load_model(configs)

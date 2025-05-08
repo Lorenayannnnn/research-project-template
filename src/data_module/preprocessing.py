@@ -37,7 +37,7 @@ def preprocess(configs, raw_datasets):
         tokenized_eval_dataset = eval_dataset.map(tokenize, fn_kwargs={"configs": configs, "tokenizer": tokenizer})
 
     if configs.training_args.do_predict:
-        if "test" not in raw_datasets and "test_matched" not in raw_datasets:
+        if "predict" not in raw_datasets and "test_matched" not in raw_datasets:
             raise ValueError("--do_predict requires a test dataset")
         predict_dataset = raw_datasets["validation_matched" if configs.data_args.dataset_name == "mnli" else "validation"]
         if configs.data_args.max_predict_samples is not None:
@@ -49,7 +49,7 @@ def preprocess(configs, raw_datasets):
         "train": tokenized_train_dataset,
         "eval": tokenized_eval_dataset,
         "predict": tokenized_predict_dataset
-    }
+    }, tokenizer
 
 def create_tokenizer(configs):
     """creates the tokenizer"""

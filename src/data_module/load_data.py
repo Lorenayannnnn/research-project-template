@@ -9,6 +9,7 @@ import pandas as pd
 
 import datasets
 from datasets import load_dataset, Dataset
+from src.data_module.DataCollator import DataCollator
 
 
 def load_data_from_hf(file_or_dataset_name, cache_dir=None):
@@ -45,16 +46,7 @@ def load_data_to_pd(file_or_dataset_name, return_df_only=False):
     pass
 
 
-def collate_fn(batch):
-    """
-    collate function for DataLoader
-    :param batch: list of samples
-    :return: batch
-    """
-    pass
-
-
-def setup_dataloader(input_datasets, batch_size):
+def setup_dataloader(input_datasets, batch_size, tokenizer):
     """
 
     :param input_datasets: dictionary of datasets (train, eval, predict)
@@ -66,5 +58,5 @@ def setup_dataloader(input_datasets, batch_size):
         if split not in input_datasets:
             dataloaders[split] = None
         else:
-            dataloaders[split] = DataLoader(input_datasets[split], shuffle=split == "train", batch_size=batch_size, collate_fn=collate_fn)
+            dataloaders[split] = DataLoader(input_datasets[split], shuffle=split == "train", batch_size=batch_size, collate_fn=DataCollator(tokenizer))
     return dataloaders
