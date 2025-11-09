@@ -1,4 +1,4 @@
-#hydra-core
+hydra-core
 #numpy
 #pandas
 #torch==2.0.0
