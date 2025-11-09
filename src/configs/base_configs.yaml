@@ -57,3 +57,7 @@ training_args:
   wandb_run_name: ""
   wandb_watch: ""
   wandb_log_model: ""
+
+hydra:
+  run:
+    dir: ${training_args.output_dir}

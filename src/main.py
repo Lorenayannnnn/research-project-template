@@ -1,4 +1,5 @@
-import argparse
+
+import hydra
 
 from src.common_utils import load_config_and_setup_output_dir, prepare_wandb
 from src.data_module.load_data import load_data_from_hf, setup_dataloader
@@ -6,10 +7,10 @@ from src.data_module.preprocessing import preprocess
 from src.model_module.load_model import load_model
 from src.train_module.train_utils import create_trainer_args, create_trainer
 
-
-def main(args):
+@hydra.main(config_path="configs", config_name="base_configs", version_base=None)
+def main(configs):
     print("Loading configuration, setting up output directories...")
-    configs = load_config_and_setup_output_dir(args)
+    configs = load_config_and_setup_output_dir(configs)
     configs = prepare_wandb(configs)
 
     """Load the data"""
@@ -41,26 +42,5 @@ def main(args):
     print("yay!")
 
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-        "--base_configs",
-        type=str,
-        required=True,
-        help="Base configuration file"
-    )
-
-    parser.add_argument(
-        "--overwrite_configs",
-        type=str,
-        required=False,
-        help="Config/variation to overwrite the base configuration"
-    )
-
-    return parser.parse_args()
-
-
 if __name__ == "__main__":
-    args = parse_args()
-    main(args)
+    main()
