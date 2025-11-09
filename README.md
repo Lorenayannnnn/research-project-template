@@ -1,22 +1,24 @@
 # research-project-template
 Template for research project
-Collaborated with [Ryan Yixiang Wang](https://github.com/ryanyxw)
 
 ## Structure
 ```
-└── configs
-    ├── base_configs.yaml: contains the base configurations for the project
-    ├── overwrite_configs.yaml: include variations that you want to overwrite to the base configurations
-    └── ...
+└── datasets
+└── outputs
+└── scripts
+    └── main.sh: bash script to run the main.py. Override config options here.
 └── src
-    ├── analysis_module: scripts for analysis
+    ├── analysis_module: scripts for analysis, plotting, etc.
+    └── configs
+        ├── base_configs.yaml: contains the base configurations for the main.py script
+        └── ...
     ├── data_module: data loading and processing (tokenization...)
-    ├── model_module: model definition and loading
+    ├── eval_module: code for evaluation
+    ├── model_module: model definition and initialization
     ├── train_module: code for training
-    ├── (Optional) eval_module: code for evaluation
-    └── ...
+    ├── common_utils.py: common utility functions
+    └── main.py: main entry point for the project. config is specified via the hydra decorator, which can be overridden from bash
 └── .gitignore
-└── main.sh: main entry point for the project
 └── requirements.txt: list of dependencies
 └── ...
 ```
@@ -24,13 +26,12 @@ Collaborated with [Ryan Yixiang Wang](https://github.com/ryanyxw)
 ## Usage
 ### Setup
 ```
-conda create -n YOUR_PROJECT_NAME python=3.8
+conda create -n YOUR_PROJECT_NAME python=YOUR_PYTHON_VERSION
 conda activate YOUR_PROJECT_NAME
 pip install -r requirements.txt
 ```
-### Code Implementation for Each Module
 ### Run
-- Go to [main.sh](scripts/main.sh) and modify the configurations in the `configs` folder
+- Go to [main.sh](scripts/main.sh) and modify the configurations as needed
 - Run:
 ```
 bash main.sh
